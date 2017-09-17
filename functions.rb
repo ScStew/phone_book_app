@@ -1,4 +1,3 @@
-require "sinatra"
 require "pg"
 load './local_env.rb' if File.exist?('./local_env.rb')
 
@@ -23,3 +22,24 @@ check = db.exec("SELECT * FROM phonebook_table WHERE phone = '#{arr[-1]}'")
 	end
 	answer
 end
+
+
+def get_info_database()
+	db_params = {
+	host: ENV['host'],
+	port: ENV['port'],
+	dbname: ENV['dbname'],
+	user: ENV['user'],
+	password: ENV['password']
+}
+data = []
+db = PG::Connection.new(db_params)
+ db.exec( "SELECT * FROM phonebook_table" ) do |result|
+      result.each do |row|
+      	data << row.values
+      end
+    end
+   p "#{data}"
+end
+
+get_info_database()

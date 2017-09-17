@@ -31,5 +31,7 @@ end
 
 get "/answer_page" do
 	answer = params[:answer]
+	
 	erb :answer_page, locals:{answer:answer}
+
 end

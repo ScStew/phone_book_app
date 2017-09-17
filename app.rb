@@ -15,3 +15,12 @@ get "/" do
 	erb :get_info
 end
 
+post "/got_info" do
+info[] << params[:fname]
+info[] << params[:lname]
+info[] << params[:city]
+info[] << params[:state]
+info[] << params[:zip]
+info[] << params[:phone]
+
+end

@@ -28,3 +28,18 @@ get "/answer_page" do
 	erb :answer_page, locals:{answer:answer,phone_book:phone_book}
 
 end
+
+
+post "/search" do
+	lname = params[:lname]
+	phone = params[:phone]
+	if phone == nil and lname == nil
+		search_answer = "Need search turm"
+	elsif lname == nil
+		search_answer = search_data(phone)
+	else
+		search_answer = search_data(lname)
+	end
+	erb :seach_page, locals:{search_answer:search_answer}
+end
+

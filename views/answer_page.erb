@@ -1,1 +1,8 @@
-<%=answer%>
+<%=answer%><br>
+
+<%phone_book.each do |row|%>
+	<%row.each do |item|%>
+		<%=item%>
+	<%end%>
+	<br>
+	<%end%>

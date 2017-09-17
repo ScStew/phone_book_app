@@ -39,7 +39,7 @@ db = PG::Connection.new(db_params)
       	data << row.values
       end
     end
-   p "#{data}"
+   data
 end
 
-get_info_database()
+# get_info_database()

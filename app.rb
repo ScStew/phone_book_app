@@ -17,21 +17,14 @@ get "/" do
 end
 
 post "/got_info" do
-info = []
-info << params[:fname]
-info << params[:lname]
-info << params[:address]
-info << params[:city]
-info << params[:state]
-info << params[:zipcode]
-info << params[:phone]
+info = params[:info]
 answer = adding_to_table(info)
 redirect "/answer_page?answer=" + answer
 end
 
 get "/answer_page" do
 	answer = params[:answer]
-	
-	erb :answer_page, locals:{answer:answer}
+	phone_book = get_info_database()
+	erb :answer_page, locals:{answer:answer,phone_book:phone_book}
 
 end

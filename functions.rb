@@ -42,4 +42,40 @@ db = PG::Connection.new(db_params)
    data
 end
 
+def search_data_phone(info)
+	db_params = {
+	host: ENV['host'],
+	port: ENV['port'],
+	dbname: ENV['dbname'],
+	user: ENV['user'],
+	password: ENV['password']
+}
+data = []
+db = PG::Connection.new(db_params)
+check = db.exec("SELECT * FROM phonebook_table WHERE phone = '#{info}'")
+woo = check.num_tuples
+if check.num_tuples.zero? == false
+	p "#{woo}"
+end
+
+end
+
+def search_data_lname(info)
+	db_params = {
+	host: ENV['host'],
+	port: ENV['port'],
+	dbname: ENV['dbname'],
+	user: ENV['user'],
+	password: ENV['password']
+}
+data = []
+db = PG::Connection.new(db_params)
+check = db.exec("SELECT * FROM phonebook_table WHERE last_name = '#{info}'")
+woo = check.num_tuples
+if check.num_tuples.zero? == false
+	search_answer = check.values
+else
+	search_answer = "isnt in phone book"
+end
+end
 # get_info_database()

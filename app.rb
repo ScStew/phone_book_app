@@ -1,6 +1,7 @@
 require "sinatra"
 require "pg"
 require_relative "functions.rb"
+enable :sessions
 load './local_env.rb' if File.exist?('./local_env.rb')
 
 db_params = {
@@ -33,13 +34,18 @@ end
 post "/search" do
 	lname = params[:lname]
 	phone = params[:phone]
-	if phone == nil and lname == nil
-		search_answer = "Need search turm"
-	elsif lname == nil
-		search_answer = search_data(phone)
+	session[:search_answer] = "wooooo"
+	if phone and lname == ""
+		session[:search_answer] = "Need search turm"
+	elsif phone == ""
+		session[:search_answer] = search_data_lname(lname)
 	else
-		search_answer = search_data(lname)
+		session[:search_answer] = search_data_phone(phone)
 	end
-	erb :seach_page, locals:{search_answer:search_answer}
+	redirect "/search_answer?"
 end
 
+get "/search_answer" do
+
+erb :search_page, locals:{search_answer:session[:search_answer]}
+end

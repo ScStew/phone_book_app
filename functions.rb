@@ -98,6 +98,25 @@ db = PG::Connection.new(db_params)
 end
 
 def delete_from_table(delete_info)
-p "#{delete_info}"
+	db_params = {
+	host: ENV['host'],
+	port: ENV['port'],
+	dbname: ENV['dbname'],
+	user: ENV['user'],
+	password: ENV['password']
+}
+db = PG::Connection.new(db_params)
+	arr = []
+	delete_info.each do |row|
+		woo = row.split(',')
+		arr << woo
+	end
+	# delete_split = delete_info.split(',')
+	# delete_slice = delete_slice.slice(7).to_a
+	arr.each do |row|
+		delete_num = row[-1]
+		db.exec("DELETE FROM phonebook_table WHERE phone = '#{delete_num}'")
+	end
+
 end
 

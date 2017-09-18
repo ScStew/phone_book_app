@@ -1,6 +1,11 @@
-<%search_answer.each do |row|%>
-<%row.each do |item| %>
-<%=item%>
-<%end%>
-<br>
+<%unless search_answer == "Need search term"%>
+	<%search_answer.each do |row|%>
+		<%row.each do |item| %>
+			<%=item%>
+		<%end%>
+	<br>
+	<%end%>
+
+<%else%>
+<%=search_answer%>
 <%end%>

@@ -50,15 +50,17 @@ def search_data_phone(info)
 	user: ENV['user'],
 	password: ENV['password']
 }
-data = []
-db = PG::Connection.new(db_params)
-check = db.exec("SELECT * FROM phonebook_table WHERE phone = '#{info}'")
-woo = check.num_tuples
-if check.num_tuples.zero? == false
-	p "#{woo}"
-end
+	data = []
+	db = PG::Connection.new(db_params)
+	check = db.exec("SELECT * FROM phonebook_table WHERE phone = '#{info}'")
+	
+	if check.num_tuples.zero? == false
+			search_answer = check.values
+	else
+		search_answer = "isnt in phone book"
+	end
 
-end
+	end
 
 def search_data_lname(info)
 	db_params = {

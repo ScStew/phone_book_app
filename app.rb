@@ -34,9 +34,9 @@ end
 post "/search" do
 	lname = params[:lname]
 	phone = params[:phone]
-	session[:search_answer] = "wooooo"
-	if phone and lname == ""
-		session[:search_answer] = "Need search turm"
+	
+	if phone == "" and lname == ""
+		session[:search_answer] = "Need search term"
 	elsif phone == ""
 		session[:search_answer] = search_data_lname(lname)
 	else

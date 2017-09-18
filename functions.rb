@@ -97,3 +97,7 @@ db = PG::Connection.new(db_params)
 	end	
 end
 
+def delete_from_table(delete_info)
+p "#{delete_info}"
+end
+

@@ -3,7 +3,6 @@
 <%unless search_answer == "Need search term" ||search_answer ==  "isnt in phone book" %>
 
 	<%search_answer.each do |row|%>
-	<%=row%>
 	<%woo = row.join(",")%>
 		<input type = "checkbox" name = "info[]" value = "<%=woo%>"> 
 		<%row.each do |item| %>
@@ -15,6 +14,7 @@
 <%else%>
 <%=search_answer%>
 <%end%>
-
-<input type = "submit" value = "update">
+<input type = "radio" name = "choose" value = "update" checked>update
+<input type = "radio" name = "choose" value = "delete">delete<br>
+<input type = "submit" value = "enter">
 </form>

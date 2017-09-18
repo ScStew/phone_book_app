@@ -51,9 +51,14 @@ erb :search_page, locals:{search_answer:session[:search_answer]}
 end
 
 post "/update" do
-session[:info] = params[:info]
-
-redirect "/update_answer?"
+	session[:info] = params[:info]
+	choose = params[:choose]
+	
+	if choose == "update"
+		redirect "/update_answer?"
+	else
+		redirect "/delete?"
+	end
 
 end
 
@@ -74,4 +79,11 @@ post '/updated' do
   end
    update_table(updated_slice,old_phone)
    redirect "/answer_page?answer=" + answer
+end
+
+get "/delete" do
+	answer = "Info DELETED"
+	deleting_info = session[:info]
+	delete_from_table(deleting_info)
+	redirect "/answer_page?answer=" + answer
 end

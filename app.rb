@@ -53,11 +53,15 @@ end
 post "/update" do
 	session[:info] = params[:info]
 	choose = params[:choose]
-	
-	if choose == "update"
-		redirect "/update_answer?"
+	if session[:info] == nil
+		answer = "Didn't Change"
+		redirect "/answer_page?answer=" + answer
 	else
-		redirect "/delete?"
+		if choose == "update"
+			redirect "/update_answer?"
+		else
+			redirect "/delete?"
+		end
 	end
 
 end

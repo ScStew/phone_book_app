@@ -1,4 +1,4 @@
-<%unless search_answer == "Need search term"%>
+<%unless search_answer == "Need search term" || "isnt in phone book" %>
 	<%search_answer.each do |row|%>
 		<%row.each do |item| %>
 			<%=item%>

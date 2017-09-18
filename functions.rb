@@ -50,7 +50,6 @@ def search_data_phone(info)
 	user: ENV['user'],
 	password: ENV['password']
 }
-	data = []
 	db = PG::Connection.new(db_params)
 	check = db.exec("SELECT * FROM phonebook_table WHERE phone = '#{info}'")
 	
@@ -70,7 +69,6 @@ def search_data_lname(info)
 	user: ENV['user'],
 	password: ENV['password']
 }
-data = []
 db = PG::Connection.new(db_params)
 check = db.exec("SELECT * FROM phonebook_table WHERE last_name = '#{info}'")
 woo = check.num_tuples
@@ -81,3 +79,17 @@ else
 end
 end
 # get_info_database()
+
+
+def update_table(info)
+		db_params = {
+	host: ENV['host'],
+	port: ENV['port'],
+	dbname: ENV['dbname'],
+	user: ENV['user'],
+	password: ENV['password']
+}
+db = PG::Connection.new(db_params)
+
+	p "#{info}"
+end

@@ -1,5 +1,8 @@
+<form method = "post" action = "update">
+
 <%unless search_answer == "Need search term" ||search_answer ==  "isnt in phone book" %>
 	<%search_answer.each do |row|%>
+		<input type = "checkbox" name = "info[]" value = "<%=row%>"> 
 		<%row.each do |item| %>
 			<%=item%>
 		<%end%>
@@ -9,3 +12,5 @@
 <%else%>
 <%=search_answer%>
 <%end%>
+
+<input type = "submit" name = "update">

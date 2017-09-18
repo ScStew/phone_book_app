@@ -4,8 +4,12 @@
 <%split = row.split(',')%>
 <br>
 <%split.each do |item|%>
-<input type = "text" name = info[] value = "<%=item%>"
+<input type = "text" name = info[] value = "<%=item%>">
 <%end%>
 <br>
 <%end%>
+<input type = "radio" name = "choose" value = "update">update
+<input type = "radio" name = "choose" value = "delete">delete
+
+<input type = "submit" value = "enter">
 </form>

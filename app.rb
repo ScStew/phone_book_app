@@ -60,3 +60,18 @@ end
 get "/update_answer" do
 erb :update, locals:{info:session[:info]}
 end
+
+post '/updated' do
+	answer = "Info Updated"
+  updated_info = params[:info]
+	updated_slice = updated_info.each_slice(7).to_a
+  info = session[:info]
+  old_phone = []
+  
+  info.each do |row|
+  	split = row.split(',')
+  	old_phone << split[-1]
+  end
+   update_table(updated_slice,old_phone)
+   redirect "/answer_page?answer=" + answer
+end

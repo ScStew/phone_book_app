@@ -81,7 +81,7 @@ end
 # get_info_database()
 
 
-def update_table(info)
+def update_table(info_new,old_phone)
 		db_params = {
 	host: ENV['host'],
 	port: ENV['port'],
@@ -90,6 +90,10 @@ def update_table(info)
 	password: ENV['password']
 }
 db = PG::Connection.new(db_params)
-
-	p "#{info}"
+	counter = 0
+	info_new.each do |arr|
+		db.exec("UPDATE phonebook_table SET first_name = '#{arr[0]}' ,last_name = '#{arr[1]}',address = '#{arr[2]}',city = '#{arr[3]}',state = '#{arr[4]}',zip = '#{arr[5]}',phone = '#{arr[6]}'WHERE phone = '#{old_phone[counter]}'")
+		counter =+ 1
+	end	
 end
+

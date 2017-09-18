@@ -1,0 +1,11 @@
+<form method = "post" action = "updated">
+<%info.each do |row|%>
+<%=row%>
+<%split = row.split(',')%>
+<br>
+<%split.each do |item|%>
+<input type = "text" name = info[] value = "<%=item%>"
+<%end%>
+<br>
+<%end%>
+</form>

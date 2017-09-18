@@ -51,11 +51,12 @@ erb :search_page, locals:{search_answer:session[:search_answer]}
 end
 
 post "/update" do
-info = params[:info]
-session[:update] = update_table(info)
- redirect "/update_answer?"
-}
+session[:info] = params[:info]
+
+redirect "/update_answer?"
+
 end
 
 get "/update_answer" do
-	erb :update , locals:{info:session}
+erb :update, locals:{info:session[:info]}
+end

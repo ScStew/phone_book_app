@@ -1,14 +1,31 @@
+<div id = "box2">
 <form method = "post" action = "updated">
 <%info.each do |row|%>
-<%=row%>
-<%split = row.split(',')%>
-<br>
-<%split.each do |item|%>
-<input type = "text" name = info[] value = "<%=item%>">
-<%end%>
+<table width = "100%">
+	<th>First</th>
+	<th>Last</th>
+	<th>Address</th>
+	<th>City</th>
+	<th>State</th>
+	<th>Zip</th>
+	<th>Phone</th>
+
+	<%split = row.split(',')%>
+	<tr>
+	<%split.each do |item|%>
+		<td><%=item%></td> 
+	<%end%>
+	</tr>
+	<tr>
+	<%split.each do |item|%>
+	<td><input type = "text" name = info[] value = "<%=item%>"></td>
+	<%end%>
+	</tr>
+</table>
 <br>
 <%end%>
 
 
 <input type = "submit" value = "update">
 </form>
+</div>

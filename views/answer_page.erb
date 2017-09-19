@@ -1,8 +1,22 @@
-<%=answer%><br>
+<div id = "fancy">
+	<%=answer%><br>
+</div>
 
-<%phone_book.each do |row|%>
-	<%row.each do |item|%>
-		<%=item%>
-	<%end%>
-	<br>
-	<%end%>
+<div id = "box">
+	<table width = 100%>
+		<th>First</th>
+		<th>Last</th>
+		<th>Address</th>
+		<th>City</th>
+		<th>State</th>
+		<th>Zip</th>
+		<th>Phone</th>
+		<%phone_book.each do |row|%>
+		<tr>
+			<%row.each do |item|%>
+				<td><%=item%></td>
+			<%end%>
+		</tr>
+			<%end%>
+	</table>
+</div>

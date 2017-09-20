@@ -14,7 +14,7 @@ db_params = {
 db = PG::Connection.new(db_params)
 
 get "/" do
-	erb :get_info
+	erb :login
 end
 
 post "/got_info" do

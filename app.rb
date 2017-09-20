@@ -17,6 +17,22 @@ get "/" do
 	erb :login
 end
 
+post "/login" do
+	user = params[:username]
+	pass = params[:password]
+	check_creds?(user,pass)
+	if check_creds == true
+		redirect "/get_info"
+	else 
+		redirect "/"
+	end
+end
+
+get "/get_info" do 
+	erb :get_info
+end
+
+
 post "/got_info" do
 info = params[:info]
 answer = adding_to_table(info)

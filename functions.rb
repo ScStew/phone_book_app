@@ -133,7 +133,7 @@ db = PG::Connection.new(db_params)
  
 check = db.exec("SELECT*FROM creds_table WHERE username = '#{user}'")
  		if check.num_tuples.zero? == false
- 			if check[:password] == pass
+ 			if check.values[-1] == pass
  				true
  			else
  				false
@@ -153,6 +153,13 @@ def add_to_login(user,pass)
 	password: ENV['password']
 }
 db = PG::Connection.new(db_params)
- 
-db.exec("input into creds_table(username,pass)VALUES('#{user}','#{pass}'")
+ check = db.exec("SELECT*FROM creds_table WHERE username = '#{user}'")
+	message = ""
+	if check.num_tuples.zero? == false
+		message = "Username Already Taken"
+	else
+		message = "Login Created"
+	db.exec("insert into creds_table(username,pass)VALUES('#{user}','#{pass}')")
+	end
+	message
 end

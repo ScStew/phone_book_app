@@ -4,17 +4,21 @@ require_relative "functions.rb"
 enable :sessions
 load './local_env.rb' if File.exist?('./local_env.rb')
 
-db_params = {
-	host: ENV['host'],
-	port: ENV['port'],
-	dbname: ENV['dbname'],
-	user: ENV['user'],
-	password: ENV['password']
-}
-db = PG::Connection.new(db_params)
+# db_params = {
+# 	host: ENV['host'],
+# 	port: ENV['port'],
+# 	dbname: ENV['dbname'],
+# 	user: ENV['user'],
+# 	password: ENV['password']
+# }
+# db = PG::Connection.new(db_params)
 
 get "/" do
-	erb :login
+	message = params[:message]
+	if message == nil
+		message = "Please Login"
+	end
+	erb :login, locals:{message:message}
 end
 
 post "/create_login" do
@@ -27,19 +31,19 @@ end
 post "/made_login" do
 	user = params[:user]
 	pass = params[:pass]
-	add_to_login(user,pass)
-	redirect "/"
+	message = add_to_login(user,pass)
+	redirect "/?message=" + message
 end
 
 
 post "/login" do
 	user = params[:username]
 	pass = params[:password]
-	check_creds?(user,pass)
-	if check_creds? == true 
+	if check_creds?(user,pass) == true 
 		redirect "/get_info"
 	else 
-		redirect "/"
+		message = "incorrect username or password"
+		redirect "/?message=" + message
 	end
 end
 

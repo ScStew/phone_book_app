@@ -1,4 +1,7 @@
 require "pg"
+require "bcrypt"
+
+
 load './local_env.rb' if File.exist?('./local_env.rb')
 
 def adding_to_table(arr)
@@ -133,8 +136,10 @@ db = PG::Connection.new(db_params)
  
 check = db.exec("SELECT*FROM creds_table WHERE username = '#{user}'")
  		if check.num_tuples.zero? == false
- 			check_pass = check.values.flatten
-  			if check_pass[1] == pass
+ 			check_val = check.values.flatten
+ 			check_pass = BCrypt::Password.new(check_val[1])
+ 			p "#{check_pass}"
+  			if check_val[1] == check_pass
  				true
  			else
  				false
@@ -160,7 +165,8 @@ db = PG::Connection.new(db_params)
 		message = "Username Already Taken"
 	else
 		message = "Login Created"
-	db.exec("insert into creds_table(username,pass)VALUES('#{user}','#{pass}')")
+	pass_b = BCrypt::Password.create "#{pass}"
+	db.exec("insert into creds_table(username,pass)VALUES('#{user}','#{pass_b}')")
 	end
 	message
 end

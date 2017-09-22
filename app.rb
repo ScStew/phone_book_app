@@ -1,5 +1,6 @@
 require "sinatra"
 require "pg"
+require "bcrypt"
 require_relative "functions.rb"
 enable :sessions
 load './local_env.rb' if File.exist?('./local_env.rb')

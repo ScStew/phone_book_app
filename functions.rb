@@ -94,7 +94,7 @@ db = PG::Connection.new(db_params)
 	info_new.each do |arr|
 		db.exec("UPDATE phonebook_table SET first_name = '#{arr[0]}' ,last_name = '#{arr[1]}',address = '#{arr[2]}',city = '#{arr[3]}',state = '#{arr[4]}',zip = '#{arr[5]}',phone = '#{arr[6]}'WHERE phone = '#{old_phone[counter]}'")
 		counter =+ 1
-	end	
+	end
 end
 
 def delete_from_table(delete_info)
@@ -120,3 +120,25 @@ db = PG::Connection.new(db_params)
 
 end
 
+
+def check_creds?(user,pass)
+	db_params = {
+	host: ENV['host'],
+	port: ENV['port'],
+	dbname: ENV['dbname'],
+	user: ENV['user'],
+	password: ENV['password']
+}
+db = PG::Connection.new(db_params)
+ 
+check = db.exec("SELECT*FROM creds_table WHERE username = '#{user}'")
+ 		if check.num_tuples.zero? == false
+ 			if check[:password] == pass
+ 				true
+ 			else
+ 				false
+ 			end
+ 		else
+ 			false
+ 		end
+end

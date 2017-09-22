@@ -17,11 +17,18 @@ get "/" do
 	erb :login
 end
 
+post "/create_login"
+	redirect "/make_login"
+end
+get "/make_login"
+	erb :make_login
+end
+
 post "/login" do
 	user = params[:username]
 	pass = params[:password]
 	check_creds?(user,pass)
-	if check_creds == true
+	if check_creds? == true 
 		redirect "/get_info"
 	else 
 		redirect "/"
@@ -107,3 +114,4 @@ get "/delete" do
 	delete_from_table(deleting_info)
 	redirect "/answer_page?answer=" + answer
 end
+

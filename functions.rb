@@ -133,7 +133,8 @@ db = PG::Connection.new(db_params)
  
 check = db.exec("SELECT*FROM creds_table WHERE username = '#{user}'")
  		if check.num_tuples.zero? == false
- 			if check.values[-1] == pass
+ 			check_pass = check.values.flatten
+  			if check_pass[1] == pass
  				true
  			else
  				false

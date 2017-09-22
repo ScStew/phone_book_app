@@ -17,12 +17,20 @@ get "/" do
 	erb :login
 end
 
-post "/create_login"
+post "/create_login" do
 	redirect "/make_login"
 end
-get "/make_login"
+get "/make_login" do
 	erb :make_login
 end
+
+post "/made_login" do
+	user = params[:user]
+	pass = params[:pass]
+	add_to_login(user,pass)
+	redirect "/"
+end
+
 
 post "/login" do
 	user = params[:username]

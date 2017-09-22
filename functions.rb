@@ -142,3 +142,17 @@ check = db.exec("SELECT*FROM creds_table WHERE username = '#{user}'")
  			false
  		end
 end
+
+
+def add_to_login(user,pass)
+		db_params = {
+	host: ENV['host'],
+	port: ENV['port'],
+	dbname: ENV['dbname'],
+	user: ENV['user'],
+	password: ENV['password']
+}
+db = PG::Connection.new(db_params)
+ 
+db.exec("input into creds_table(username,pass)VALUES('#{user}','#{pass}'")
+end

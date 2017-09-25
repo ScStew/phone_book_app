@@ -1,27 +1,40 @@
 <div id = "box2">
 <form method = "post" action = "updated">
 <%info.each do |row|%>
-<table width = "100%">
-	<th>First</th>
-	<th>Last</th>
-	<th>Address</th>
-	<th>City</th>
-	<th>State</th>
-	<th>Zip</th>
-	<th>Phone</th>
+	<table width = "100%">
+		<th>First</th>
+		<th>Last</th>
+		<th>Address</th>
+		<th>City</th>
+		<th>State</th>
+		<th>Zip</th>
+		<th>Phone</th>
 
-	<%split = row.split(',')%>
-	<tr>
-	<%split.each do |item|%>
-		<td><%=item%></td> 
-	<%end%>
-	</tr>
-	<tr>
-	<%split.each do |item|%>
-	<td><input type = "text" name = info[] value = "<%=item%>" required></td>
-	<%end%>
-	</tr>
-</table>
+		<%split = row.split(',')%>
+		<tr>
+		<%split.each do |item|%>
+			<td><%=item%></td> 
+		<%end%>
+		</tr>
+		<%count = 0%>
+		<tr>
+		<%split.each do |item|%>
+			<%if count == 6%>
+				<td><input type = "text" name = "info[]" value = "<%=item%>" required
+					maxlength="10"> </td>
+			<%elsif count == 5%>
+				<td><input type = "text" name = "info[]" value = "<%=item%>" required
+					minlenght="5" maxlength="5"> </td>
+			<%elsif count == 4%>
+				<td><input type = "text" name = "info[]" value = "<%=item%>" required
+					minlength="2" maxlength="2"> </td>
+			<%else%>
+			<td><input type = "text" name = info[] value = "<%=item%>" required></td>
+			<%end%>
+		<%count =+ 1%>
+		<%end%>
+		</tr>
+	</table>
 <br>
 <%end%>
 

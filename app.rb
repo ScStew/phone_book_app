@@ -55,6 +55,11 @@ end
 
 post "/got_info" do
 info = params[:info]
+
+info.each do |item|
+	item.capitalize!
+end
+
 answer = adding_to_table(info)
 redirect "/answer_page?answer=" + answer
 end
@@ -74,7 +79,7 @@ post "/search" do
 	if phone == "" and lname == ""
 		session[:search_answer] = "Need search term"
 	elsif phone == ""
-		session[:search_answer] = search_data_lname(lname)
+		session[:search_answer] = search_data_lname(lname.capitalize!)
 	else
 		session[:search_answer] = search_data_phone(phone)
 	end

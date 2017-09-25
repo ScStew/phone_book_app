@@ -115,6 +115,14 @@ post '/updated' do
 	answer = "Info Updated"
   updated_info = params[:info]
 	updated_slice = updated_info.each_slice(7).to_a
+	p "#{updated_slice}updated slice here"
+	updated_slice.each do |item|
+		item.each do |var|
+			var.capitalize!
+		end
+	end
+
+  
   info = session[:info]
   old_phone = []
   
@@ -133,3 +141,6 @@ get "/delete" do
 	redirect "/answer_page?answer=" + answer
 end
 
+post "/retry" do 
+	redirect "/get_info?"
+end

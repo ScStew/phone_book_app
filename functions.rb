@@ -139,7 +139,7 @@ check = db.exec("SELECT*FROM creds_table WHERE username = '#{user}'")
  			check_val = check.values.flatten
  			check_pass = BCrypt::Password.new(check_val[1])
  			p "#{check_pass}"
-  			if check_val[1] == check_pass
+  			if check_pass == pass
  				true
  			else
  				false
